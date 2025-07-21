@@ -124,4 +124,4 @@ MIT
 
 ---
 
-**PromptStack** helps your team ship faster by making your codebase searchable, understandable, and
+**PromptStack** helps your team ship faster by making your codebase searchable, understandable, and and collaborative
