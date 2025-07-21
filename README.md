@@ -1,29 +1,127 @@
-# Create T3 App
+# 🚀 PromptStack
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+**PromptStack** is a modern, full-stack platform designed to supercharge collaborative software development. It brings together GitHub repository analysis, team management, meeting transcription, and AI-powered Q&A—helping teams onboard, document, and understand their codebases faster.
 
-## What's next? How do I make an app with this?
+---
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## ✨ Features
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+- **🔗 GitHub Integration:**  
+  Connect your project to a GitHub repository. Automatically index files, summarize code, and track commits.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+- **🤖 AI-Powered Q&A:**  
+  Ask questions about your codebase and get context-aware answers using advanced language models and semantic search.
 
-## Learn More
+- **👥 Team Management:**  
+  Invite team members, manage roles, and view contributors.
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+- **🎤 Meeting Upload & Processing:**  
+  Upload meeting audio files, transcribe, and summarize discussions. Link meeting notes to code and issues.
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+- **📜 Commit Log:**  
+  View recent commits, summaries, and author details directly in your dashboard.
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+- **📦 Project Archiving:**  
+  Archive projects when they're no longer active.
 
-## How do I deploy this?
+---
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+## 🛠️ Tech Stack
+
+- **Frontend:** Next.js (App Router), React, Radix UI, Tailwind CSS  
+- **Backend:** tRPC, Prisma, PostgreSQL (with pgvector for embeddings)  
+- **Authentication:** Clerk  
+- **AI & Embeddings:** Ollama (local), OpenAI, or Perplexity (cloud, configurable)  
+- **Other:** Sonner (notifications), React Query, Axios
+
+---
+
+## 🚦 Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-org/promptstack.git
+cd promptstack
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure Environment Variables
+
+Create a `.env.local` file and set the following:
+
+```env
+DATABASE_URL=your_postgres_url
+GITHUB_TOKEN=your_github_token
+CLERK_PUBLISHABLE_KEY=your_clerk_key
+CLERK_SECRET_KEY=your_clerk_secret
+OPENAI_API_KEY=your_openai_key # if using OpenAI
+PERPLEXITY_API_KEY=your_perplexity_key # if using Perplexity
+```
+
+### 4. Run Database Migrations
+
+```bash
+npx prisma migrate dev
+```
+
+### 5. Start the Development Server
+
+```bash
+npm run dev
+```
+
+---
+
+## 🧑‍💻 Usage
+
+1. **Sign Up / Sign In:**  
+   Authenticate using Clerk.
+
+2. **Create a Project:**  
+   Link your GitHub repository and (optionally) provide a GitHub token for private repos.
+
+3. **Team Collaboration:**  
+   Invite team members and manage your project.
+
+4. **Ask Questions:**  
+   Use the dashboard Q&A card to ask technical questions about your codebase.
+
+5. **Upload Meetings:**  
+   Drag and drop meeting audio files to process and summarize discussions.
+
+6. **View Commits & Summaries:**  
+   See recent commits, summaries, and code references.
+
+---
+
+## ⚙️ Customization
+
+- **AI Model Provider:**  
+  Switch between Ollama (local), OpenAI, or Perplexity for completions and embeddings by updating `src/lib/gemini.ts`.
+
+- **Vector Search:**  
+  Uses pgvector in PostgreSQL for fast semantic search. You can swap for Pinecone or Qdrant if needed.
+
+## 📄 License
+
+MIT
+
+## 🙏 Acknowledgements
+
+- [LangChain](https://github.com/langchain-ai/langchain)
+- [Clerk](https://clerk.com/)
+- [Ollama](https://ollama.com/)
+- [OpenAI](https://openai.com/)
+- [Perplexity](https://www.perplexity.ai/)
+- [Radix UI](https://www.radix-ui.com/)
+- [Sonner](https://sonner.emilkowal.ski/)
+
+---
+
+**PromptStack** helps your team ship faster by making your codebase searchable, understandable, and
