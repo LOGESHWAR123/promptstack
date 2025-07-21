@@ -35,7 +35,7 @@ export async function askQuestion(question: string, projectId: string) {
       1 - (${embeddingColumn} <=> $1::vector) AS similarity
     FROM "SourceCodeEmbedding"
     WHERE ${embeddingColumn} IS NOT NULL
-      AND 1 - (${embeddingColumn} <=> $1::vector) > 0.5
+      AND 1 - (${embeddingColumn} <=> $1::vector) > 0.75
       AND "projectId" = $2
     ORDER BY similarity DESC
     LIMIT 10
@@ -43,7 +43,11 @@ export async function askQuestion(question: string, projectId: string) {
 
   let context = '';
   for (const doc of result) {
-    context += `source: ${doc.filename}\ncode content: ${doc.sourceCode}\nsummary: ${doc.summary}\n\n`;
+    context += `SUMMARY:
+File: ${doc.filename}
+Description: ${doc.summary}
+
+`;
   }
 
   console.log("context" + context);
@@ -52,10 +56,14 @@ export async function askQuestion(question: string, projectId: string) {
 You are an AI code assistant who answers questions about the codebase.
 Your target audience is a technical intern.
 
-AI Assistant traits: expert knowledge, helpfulness, cleverness, articulateness.
-Always friendly, kind, inspiring, vivid, and thoughtful.
-
-If the question is about code or a file, provide step-by-step instructions and clear reasoning.
+IMPORTANT INSTRUCTIONS:
+- You MUST answer ONLY using the provided CONTEXT BLOCK.
+- If you do NOT find the answer in the CONTEXT BLOCK, respond exactly with:
+"I'm sorry, but I don't know the answer to that based on the information provided."
+- Do NOT use any outside knowledge.
+- Restate the question in your own words to confirm understanding, then answer.
+- Answer in Markdown with code snippets if needed.
+- Be as detailed and clear as possible.
 
 START CONTEXT BLOCK
 ${context}
@@ -64,11 +72,6 @@ END OF CONTEXT BLOCK
 START QUESTION
 ${question}
 END OF QUESTION
-
-If the context does not provide the answer, say:
-"I'm sorry, but I don't know the answer to that based on the information provided."
-
-Answer in Markdown with code snippets if needed. Be as detailed as possible.
 `.trim();
 
   // Start streaming
